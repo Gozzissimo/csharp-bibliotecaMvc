@@ -33,7 +33,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Libroes}/{action=Index}/{id?}");
 
 //-----INSERT DI DATI IN DB
 using (var scope = app.Services.CreateScope())

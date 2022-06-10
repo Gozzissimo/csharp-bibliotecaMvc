@@ -11,7 +11,7 @@ namespace csharp_bibliotecaMvc.Models
             //E' il metodo di EF che crea il database SOLO se già non c'è
             context.Database.EnsureCreated();
 
-            //-----INSERT AUTORI E LIBRI
+            //-----INSERT AUTORI
             if (context.Autori.Any())
             {
                 return;   // DB has been seeded
@@ -41,6 +41,9 @@ namespace csharp_bibliotecaMvc.Models
             var Hamingway = context.Autori.Where(item => item.Cognome == "Hamingway").First();
             var Brown = context.Autori.Where(item => item.Cognome == "Brown").First();
 
+            ///--------------------------------
+            //LIBRI
+
             var libri = new Libro[]
             {
                 new Libro{LibroId="14647621746", Titolo = "I promessi sposi", Autori = new List<Autore>{Manzoni}, Scaffale = "S02", Stato= Stato.Disponibile},
@@ -57,41 +60,33 @@ namespace csharp_bibliotecaMvc.Models
             context.SaveChanges();
 
             ///--------------------------------
-
+            //UTENTI
             var utenti = new Utente[]
             {
             new Utente{Nome="Franco",Cognome="Rossi", Email = "FrancoRossi@gmail.com"},
             new Utente{Nome="Giulio",Cognome="Storti", Email = "GiulioStorti@gmail.com"},
             new Utente{Nome="Marco",Cognome="Bianchi", Email = "MarcoB@gmail.com"},
             };
+
             foreach (Utente c in utenti)
             {
                 context.Utenti.Add(c);
             }
             context.SaveChanges();
 
-            //-----------------------------
+            ///--------------------------------
+            //PRESITI
 
-            //var enrollments = new Enrollment[]
-            //{
-            //new Enrollment{StudentID=1,CourseID=1050,Grade=Grade.A},
-            //new Enrollment{StudentID=1,CourseID=4022,Grade=Grade.C},
-            //new Enrollment{StudentID=1,CourseID=4041,Grade=Grade.B},
-            //new Enrollment{StudentID=2,CourseID=1045,Grade=Grade.B},
-            //new Enrollment{StudentID=2,CourseID=3141,Grade=Grade.F},
-            //new Enrollment{StudentID=2,CourseID=2021,Grade=Grade.F},
-            //new Enrollment{StudentID=3,CourseID=1050},
-            //new Enrollment{StudentID=4,CourseID=1050},
-            //new Enrollment{StudentID=4,CourseID=4022,Grade=Grade.F},
-            //new Enrollment{StudentID=5,CourseID=4041,Grade=Grade.C},
-            //new Enrollment{StudentID=6,CourseID=1045},
-            //new Enrollment{StudentID=7,CourseID=3141,Grade=Grade.A},
-            //};
-            //foreach (Enrollment e in enrollments)
-            //{
-            //    context.Enrollments.Add(e);
-            //}
-            //context.SaveChanges();
+            var prestiti = new Prestito[]
+            {
+            new Prestito{PrestitoId=1,UtenteId=1,LibroId="14647636746",Inizio=DateTime.Parse("2022-06-05"),Fine=DateTime.Parse("2022-08-05") }
+            };
+
+            foreach (Prestito c in prestiti)
+            {
+                context.Prestiti.Add(c);
+            }
+            context.SaveChanges();
         }
     }
 }
